@@ -13,8 +13,8 @@ export default {
     darkBlueColor: "#003569",
     boxBorder, 
     borderRadius, 
-    whiteBox: `${borderRadius}; 
-                ${boxBorder};
+    whiteBox: `border-radius:${borderRadius}; 
+                border:${boxBorder};
                 backgrond-color: white;
             `
 }
