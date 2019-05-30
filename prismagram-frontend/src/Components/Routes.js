@@ -3,19 +3,24 @@ import PropTyeps from "prop-types";
 import { Route, Switch } from "react-router-dom";
 import Feed from "../Routes/Feed";
 import Auth from "../Routes/Auth";
+import Explore from "../Routes/Explore"; 
+import Profile from "../Routes/Profile";
+import Search from "../Routes/Search";
 
-
+// exact가 붙어있으면 주어진 경로와 정확히 맞아 떨어져야만 한다는 것을 의미 
 const LoggedInRoutes = () => (
-    <>
-        {/* exact가 붙어있으면 주어진 경로와 정확히 맞아 떨어져야만 한다는 것을 의미 */}
+    <Switch>
         <Route exact path="/" component={Feed} />
-    </>
+        <Route path="/explore" component={Explore} />
+        <Route path="/search" component={Search} />
+        <Route path="/:username" component={Profile} />
+    </Switch>
 );
 
 const LoggedOutRoutes = () => (
-    <>
+    <Switch>
         <Route exact path="/" component={Auth} />
-    </>
+    </Switch>
 );
 
 // 로그인 처리 Router 
