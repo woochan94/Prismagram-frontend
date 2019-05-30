@@ -1,6 +1,6 @@
 import React from "react";
 import PropTyeps from "prop-types";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Feed from "../Routes/Feed";
 import Auth from "../Routes/Auth";
 
@@ -19,13 +19,9 @@ const LoggedOutRoutes = () => (
 );
 
 // 로그인 처리 Router 
+// Switch 컴포넌트는 컴포넌트가 중복되었을 경우 Switch에 감싸면 매칭되는 첫번째 라우트만 보여주고 나머지는 보여주지 않음
 const AppRouter = ({ isLoggedIn }) => (
-    <Router>
-        {/* Switch 컴포넌트는 컴포넌트가 중복되었을 경우 Switch에 감싸면 매칭되는 첫번째 라우트만 보여주고 나머지는 보여주지 않음 */}
-        <Switch>
-            {isLoggedIn ? <LoggedInRoutes/> : <LoggedOutRoutes/>}
-        </Switch>
-    </Router>
+     <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}</Switch>
 );
 
 AppRouter.PropTyeps = {

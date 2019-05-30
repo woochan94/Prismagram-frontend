@@ -4,6 +4,7 @@ const borderRadius = "4px";
 
 // Styled components에서 변수처럼 사용함 
 export default {
+    maxWidth: "935px",
     bgColor: "#FAFAFA", 
     blackColor: "#262626",
     darkGreyColor: "#999", 
