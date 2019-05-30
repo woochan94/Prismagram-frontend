@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
-import { LOG_IN, CREATE_ACCOUNT } from "./AuthQueries";
+import { LOG_IN, CREATE_ACCOUNT, CONFIRM_SECRET, LOCAL_LOG_IN } from "./AuthQueries";
 import { toast } from 'react-toastify';
 
 export default () => {
@@ -23,6 +23,13 @@ export default () => {
       lastName: lastName.value
     }
   });
+  const confirmSecretMutation = useMutation(CONFIRM_SECRET, {
+      variables: {
+          email: email.value,
+          secret: secret.value
+      }
+  });
+  const localLogInMutation = useMutation(LOCAL_LOG_IN)
 
   const onSubmit =async(e) => {
     e.preventDefault();
@@ -66,6 +73,24 @@ export default () => {
                 }
         } else {
             toast.error("All field are required"); 
+        }
+    } else if (action === "confirm") {
+        if(secret.value !== "") {
+            try {
+                const { 
+                    data: { confirmSecret: token }
+                } = await confirmSecretMutation(); 
+                // token은 confirmSecretMutation이 작동해야만 생성되므로 
+                // 위에 localLogInMutation에서 value를 넣어주지 않고 
+                // confirmSecretMutation이 작동한 후에 variable를 넣어준것임 
+                if(token !== "" && token !== undefined) {
+                    localLogInMutation({ variables: { token } });
+                } else {
+                    throw Error();
+                }
+            } catch {
+                toast.error("Can't confirm secret"); 
+            }
         }
     }
   };
