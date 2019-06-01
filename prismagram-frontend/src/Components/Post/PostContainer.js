@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
-import { useMutation, useQuery } from 'react-apollo-hooks';
+import { useMutation } from 'react-apollo-hooks';
 import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
 import { toast } from 'react-toastify';
-import { ME } from './../SharedQueries';
 
 const PostContainer = ({
   id,
@@ -41,6 +40,7 @@ const PostContainer = ({
   };
   useEffect(() => {
     slide();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentItem]);
 
   // isLiked, not isLiked를 업데이트할 function 
