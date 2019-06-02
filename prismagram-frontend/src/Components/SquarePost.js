@@ -11,7 +11,7 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.3s linear;
   svg {
     fill: white;
   }
@@ -37,32 +37,30 @@ const Number = styled.div`
   }
 `;
 
-const NumberText = styled.div`
+const NumberText = styled.span`
   margin-left: 10px;
   font-size: 16px;
 `;
 
-const SquarePost = ({ likeCount, commentCount, file: fileUrl }) => {
-  return (
-    <Container bg={fileUrl}>
-      <Overlay>
-        <Number>
-          <HeartFull />
-          <NumberText>{likeCount}</NumberText>
-        </Number>
-        <Number>
-          <CommentFull />
-          <NumberText>{commentCount}</NumberText>
-        </Number>
-      </Overlay>
-    </Container>
-  );
-};
+const SquarePost = ({ likeCount, commentCount, file }) => (
+  <Container bg={file.url}>
+    <Overlay>
+      <Number>
+        <HeartFull />
+        <NumberText>{likeCount}</NumberText>
+      </Number>
+      <Number>
+        <CommentFull />
+        <NumberText>{commentCount}</NumberText>
+      </Number>
+    </Overlay>
+  </Container>
+);
 
 SquarePost.propTypes = {
-  file: PropTypes.string.isRequired,
   likeCount: PropTypes.number.isRequired,
-  commentCount: PropTypes.number.isRequired
+  commentCount: PropTypes.number.isRequired,
+  file: PropTypes.object.isRequired
 };
 
 export default SquarePost;
