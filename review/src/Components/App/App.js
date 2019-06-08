@@ -7,6 +7,8 @@ import { useQuery } from 'react-apollo-hooks';
 import { QUERY } from './AppQueries';
 import styled from 'styled-components';
 import Footer from "../Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Wrapper = styled.div`
   margin: 0 auto; 
@@ -23,6 +25,7 @@ export default () => {
         <GlobalStyles />
         <AppRouter isLoggedIn={isLoggedIn} />
         <Footer />
+        <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
       </Wrapper>
     </ThemeProvider>
   );
