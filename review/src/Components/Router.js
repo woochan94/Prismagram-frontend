@@ -19,7 +19,7 @@ const LoggedOutRoutes = () => (
 
 const AppRouter = ({ isLoggedIn }) => (
     <Router>
-        <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}</Switch>
+        <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}${console.log(isLoggedIn)}</Switch>
     </Router>
 );
 
