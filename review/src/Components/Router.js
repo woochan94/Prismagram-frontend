@@ -1,7 +1,7 @@
 // Router Component는 어떤 라우터를 보여줄지 다루는 Component이다. 
 import React from "react";
 import PropTypes from "prop-types";
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Feed from "../Routes/Feed";
 import Auth from "../Routes/Auth";
 
@@ -18,9 +18,7 @@ const LoggedOutRoutes = () => (
 );
 
 const AppRouter = ({ isLoggedIn }) => (
-    <Router>
-        <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}</Switch>
-    </Router>
+    <Switch>{isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}</Switch>
 );
 
 // Router는 항상 proptypes를 가져야 한다. 
