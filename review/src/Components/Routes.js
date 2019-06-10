@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Route, Switch } from 'react-router-dom';
-import Feed from "../Routes/Feed";
+import Feed from "../Routes/Feed/";
 import Auth from "../Routes/Auth";
 import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
