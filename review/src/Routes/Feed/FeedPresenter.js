@@ -1,4 +1,5 @@
 import React from "react"; 
+import Helmet from "react-helmet";
 import styled from "styled-components"; 
 import Loader from "../../Components/Loader";
 import Post from "../../Components/Post"; 
@@ -13,13 +14,16 @@ const Wrapper = styled.div`
 export default ({ data, loading }) => {
     return (
       <Wrapper>
+        <Helmet>
+          <title>Feed | Prismagram </title>
+        </Helmet>
         {loading && <Loader />}
         {!loading &&
           data &&
           data.seeFeed &&
           data.seeFeed.map(post => (
             <Post
-              key={post.id}
+              key={post.id} 
               id={post.id}
               user={post.user}
               files={post.files}
@@ -27,6 +31,8 @@ export default ({ data, loading }) => {
               isLiked={post.isLiked}
               comments={post.comments}
               createdAt={post.createdAt}
+              caption={post.caption}
+              location={post.location}
             />
           ))}
       </Wrapper>
