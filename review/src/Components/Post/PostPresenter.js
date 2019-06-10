@@ -3,7 +3,8 @@ import styled from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon, Prev, Next } from "../Icons";
+import DotCarousel from './../DotCarousel';
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -49,7 +50,15 @@ const File = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   opacity: ${props => (props.showing ? 1 : 0)};
-  transition: opacity 0.5s linear;
+  transition: opacity 0.2s linear;
+`;
+
+const SlideButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  ${props => props.type === "prev" ? "left: 10px" : "right: 10px"};
+  opacity: 0.7;
 `;
 
 const Button = styled.span`
@@ -58,6 +67,14 @@ const Button = styled.span`
 
 const Meta = styled.div`
   padding: 15px;
+  position: relative;
+`;
+
+const MetaRow = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  width: 100%;
 `;
 
 const Buttons = styled.div`
@@ -110,6 +127,8 @@ export default ({
   createdAt,
   newComment,
   currentItem,
+  slidePrev,
+  slideNext,
   toggleLike,
   onKeyPress,
   comments,
@@ -133,8 +152,17 @@ export default ({
               showing={index === currentItem}
             />
           ))}
+        {files && files.length > 1 && (
+          <>
+            <SlideButton type="prev" onClick={slidePrev}><Prev /></SlideButton>
+            <SlideButton type="next" onClick={slideNext}><Next /></SlideButton>
+          </>
+        )}
       </Files>
       <Meta>
+        <MetaRow>
+          {files && files.length > 1 && <DotCarousel length={files.length} active={currentItem} />}
+        </MetaRow>
         <Buttons>
           <Button onClick={toggleLike}>{isLiked ? <HeartFull /> : <HeartEmpty />}</Button>
           <Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import PostPresenter from "./PostPresenter";
 import useInput from "../../Hooks/useInput"; 
@@ -28,18 +28,26 @@ const PostContainer = ({
   const addCommentMutation = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value }
   });
-  const slide = () => {
+  const slideNext = () => {
     const totalFiles = files.length; 
-    if(currentItem === totalFiles - 1) {
-      setTimeout(() => setCurrentItem(0), 3000); 
+    if (currentItem === totalFiles - 1) {
+      setCurrentItem(0);
     } else {
-      setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+      setCurrentItem(currentItem + 1);
     }
   };
-  useEffect(() => {
-    slide();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentItem]);
+  const slidePrev = () => {
+    const totalFiles = files.length;
+    if (currentItem === 0) {
+      setCurrentItem(totalFiles - 1); 
+    } else {
+      setCurrentItem(currentItem - 1);
+    }
+  }
+  // useEffect(() => {
+  //   slide();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentItem]);
 
   const toggleLike = () => {
     toggleLikeMutation();
@@ -83,6 +91,8 @@ const PostContainer = ({
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
       currentItem={currentItem}
+      slidePrev={slidePrev}
+      slideNext={slideNext}
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
