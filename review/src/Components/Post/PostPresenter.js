@@ -5,6 +5,7 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Prev, Next } from "../Icons";
 import DotCarousel from './../DotCarousel';
+import { Link } from "react-router-dom";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -12,6 +13,9 @@ const Post = styled.div`
   max-width: 600px;
   user-select: none;
   margin-bottom: 25px;
+  a {
+    color: inherit;
+  }
 `;
 
 const Header = styled.header`
@@ -118,6 +122,10 @@ const Comment = styled.li`
   }
 `;
 
+const Caption = styled.div`
+  margin: 0 15px 15px 15px;
+`;
+
 export default ({
   user: { username, avatar },
   location,
@@ -132,16 +140,22 @@ export default ({
   toggleLike,
   onKeyPress,
   comments,
-  selfComments
+  selfComments,
+  caption
 }) => (
     <Post>
       <Header>
         <Avatar size="sm" url={avatar} />
         <UserColumn>
-          <FatText text={username} />
+          <Link to={`/${username}`}>
+            <FatText text={username} />
+          </Link>
           <Location>{location}</Location>
         </UserColumn>
       </Header>
+      <Caption>
+          <FatText text={caption} />
+      </Caption>
       <Files>
         {files &&
           files.map((file, index) => (
